@@ -14,4 +14,13 @@ class NETWORK_PYI_API ANetPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	
+protected:
+	virtual void BeginPlay() override;
+
+private:
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UNetHUDWidget> HUDWidgetClass;
+
+	UPROPERTY()
+	TObjectPtr<class UNetHUDWidget> HUDWidget;
 };

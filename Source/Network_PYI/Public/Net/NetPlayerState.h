@@ -13,5 +13,18 @@ UCLASS()
 class NETWORK_PYI_API ANetPlayerState : public APlayerState
 {
 	GENERATED_BODY()
+
+public:
+	ANetPlayerState();
+
+	UPROPERTY(ReplicatedUsing = OnRep_PickupCount, BlueprintReadOnly, Category = "Net|Score")
+	int32 PickupCount = 0;
+
+	UFUNCTION()
+	void OnRep_PickupCount();
+
+	void AddPickup(int32 Delta);
+
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	
 };

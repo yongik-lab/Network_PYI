@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/BoxComponent.h"
+#include "Net/NetPickup.h"
 #include "NetSpawner.generated.h"
 
 UCLASS()
@@ -22,5 +24,25 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+private:
+	UPROPERTY(VisibleAnywhere, Category = "Spawner")
+	TObjectPtr<class UBoxComponent> SpawnBox;
+
+	UPROPERTY(EditAnywhere, Category = "Spawner")
+	TSubclassOf<class ANetPickup> PickupClass;
+
+	UPROPERTY(EditAnywhere, Category = "Spawner")
+	float SpawnInterval = 3.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Spawner")
+	int32 MaxAlivePickups = 50.0f;
+
+	FTimerHandle SpawnTimerHandle;
+
+private:
+	void SpawnPickup();
+
+	int32 CountAlivePickups() const;
 
 };

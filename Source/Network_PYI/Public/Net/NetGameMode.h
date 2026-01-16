@@ -15,6 +15,16 @@ class NETWORK_PYI_API ANetGameMode : public AGameModeBase
 	GENERATED_BODY()
 	
 public:
-	
+	ANetGameMode();
+
+protected:
+	virtual void BeginPlay() override;
+
+private:
+	FTimerHandle MatchTimerHandle;
+	void TickMatch();
+
+	void StartMatchLogic();
+	void FinishMatchLogic();
 
 };
